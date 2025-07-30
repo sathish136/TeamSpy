@@ -28,11 +28,11 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className="ml-64">
         {/* Top Header */}
-        <header className="bg-gradient-to-r from-workview-primary to-workview-primary-dark text-white px-6 py-4 shadow-lg">
+        <header className="bg-gray-800 text-white px-6 py-4 shadow-lg border-b border-gray-700">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <h1 className="text-sm font-medium">Dashboard</h1>
+                <h1 className="text-sm font-medium text-white">Dashboard</h1>
               </div>
             </div>
             
@@ -41,34 +41,34 @@ export default function Dashboard() {
                 <input 
                   type="search" 
                   placeholder="Search..." 
-                  className="bg-white bg-opacity-20 placeholder-blue-100 text-white rounded-md px-2.5 py-1 w-48 text-xs focus:outline-none focus:ring-2 focus:ring-white"
+                  className="bg-gray-700 placeholder-gray-400 text-white rounded-md px-2.5 py-1 w-48 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 border border-gray-600"
                 />
-                <Search className="absolute right-2 top-2 h-3 w-3 text-blue-100" />
+                <Search className="absolute right-2 top-2 h-3 w-3 text-gray-400" />
               </div>
               
               <div className="flex items-center space-x-4">
-                <button className="relative">
+                <button className="relative text-white hover:text-gray-300">
                   <Bell className="h-4 w-4" />
                   {unreadAlerts.length > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-red-500 text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
                       {unreadAlerts.length}
                     </span>
                   )}
                 </button>
                 
                 <div className="flex items-center space-x-3">
-                  <div className="w-7 h-7 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                    <User className="h-3.5 w-3.5" />
+                  <div className="w-7 h-7 bg-gray-700 rounded-full flex items-center justify-center">
+                    <User className="h-3.5 w-3.5 text-white" />
                   </div>
-                  <span className="text-[10px] font-medium">Main Admin</span>
+                  <span className="text-[10px] font-medium text-white">Main Admin</span>
                 </div>
                 
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white border-white text-[10px] px-2 py-1"
+                  className="bg-gray-700 hover:bg-gray-600 text-white border-gray-600 text-[10px] px-2 py-1"
                 >
-                  EXPLAIN THIS PAGE
+                  HELP
                 </Button>
               </div>
             </div>
