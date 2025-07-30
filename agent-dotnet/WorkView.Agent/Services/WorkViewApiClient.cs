@@ -24,23 +24,20 @@ public class WorkViewApiClient : IWorkViewApiClient
 {
     private readonly HttpClient _httpClient;
     private readonly ILogger<WorkViewApiClient> _logger;
-    private readonly string _baseUrl;
-    private readonly string? _apiKey;
 
-    public WorkViewApiClient(HttpClient httpClient, ILogger<WorkViewApiClient> logger, string baseUrl, string? apiKey = null)
+    public WorkViewApiClient(HttpClient httpClient, ILogger<WorkViewApiClient> logger, Utils.MonitoringConfiguration config)
     {
         _httpClient = httpClient;
         _logger = logger;
-        _baseUrl = baseUrl.TrimEnd('/');
-        _apiKey = apiKey;
-        
+
         // Configure HTTP client
+        _httpClient.BaseAddress = new Uri(config.ServerUrl);
         _httpClient.Timeout = TimeSpan.FromSeconds(30);
         _httpClient.DefaultRequestHeaders.Add("User-Agent", "WorkView-Agent/1.0.0");
-        
-        if (!string.IsNullOrEmpty(_apiKey))
+
+        if (!string.IsNullOrEmpty(config.ApiKey))
         {
-            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _apiKey);
+            _httpClient.DefaultRequestHeaders.Add("X-Api-Key", config.ApiKey);
         }
     }
 
@@ -103,7 +100,7 @@ public class WorkViewApiClient : IWorkViewApiClient
     {
         try
         {
-            var url = $"{_baseUrl}/api/{endpoint}";
+            var url = $"/api/{endpoint}";
             var json = JsonSerializer.Serialize(data, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase

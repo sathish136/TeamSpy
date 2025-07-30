@@ -33,15 +33,8 @@ class Program
                 // Add configuration
                 services.AddSingleton(configuration);
                 
-                // Add HTTP client
-                services.AddHttpClient<IWorkViewApiClient, WorkViewApiClient>((serviceProvider, client) =>
-                {
-                    var config = serviceProvider.GetRequiredService<MonitoringConfiguration>();
-                    return new WorkViewApiClient(client, 
-                        serviceProvider.GetRequiredService<ILogger<WorkViewApiClient>>(),
-                        config.ServerUrl, 
-                        config.ApiKey);
-                });
+                // Add HTTP client for WorkViewApiClient
+                services.AddHttpClient<IWorkViewApiClient, WorkViewApiClient>();
 
                 // Add monitoring service
                 services.AddHostedService<MonitoringService>();
