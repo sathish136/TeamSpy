@@ -22,11 +22,8 @@ public class SystemInfo
 
     public static string GetEmployeeId()
     {
-        // Generate unique employee ID from computer name and MAC address
-        var computerName = Environment.MachineName;
-        var macAddress = GetMacAddress();
-        var hash = $"{computerName}-{macAddress}".GetHashCode();
-        return $"EMP-{Math.Abs(hash):X8}";
+        // Use the actual Windows logged-in username as employee ID
+        return Environment.UserName;
     }
 
     public static string GetMacAddress()

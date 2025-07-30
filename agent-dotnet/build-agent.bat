@@ -24,7 +24,7 @@ echo 3. No additional setup required!
 echo.
 echo The agent will automatically:
 echo - Connect to: http://10.15.115.120:5000
-echo - Generate unique employee ID from computer info
+echo - Use Windows username as employee ID
 echo - Start monitoring and sending data
 echo.
 echo Press any key to continue...

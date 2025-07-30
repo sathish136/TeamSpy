@@ -20,9 +20,9 @@ dotnet run build-agent.bat
 - **System Detection**: Automatically detects all system information
 - **Data Sync**: Starts monitoring and sending data immediately
 
-## Example Auto-Generated Employee IDs
-- Computer "DESKTOP-ABC123" → Employee ID: "EMP-A1B2C3D4"
-- Computer "LAPTOP-XYZ789" → Employee ID: "EMP-X9Y8Z7W6"
+## Employee ID Assignment
+- Employee ID = Windows Username (e.g., "john.smith", "admin", "user123")
+- Automatically detected from the logged-in Windows user
 
 ## Monitoring Features (Enabled by Default)
 - ✅ Application usage tracking

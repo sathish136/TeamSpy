@@ -32,68 +32,19 @@ export default function TimeTracking() {
 
   const unreadAlerts = (alerts as any[])?.filter((alert: any) => !alert.isRead) || [];
 
-  // Mock time tracking data
-  const timeTrackingData = [
-    {
-      id: 1,
-      employee: "Seth McGregor",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-      status: "active",
-      todayHours: "7h 23m",
-      weekHours: "42h 15m",
-      currentTask: "Frontend Development",
-      startTime: "09:00 AM",
-      productivity: 87,
-      breaks: 3,
-      overtime: "1h 23m"
-    },
-    {
-      id: 2,
-      employee: "Maria Rodriguez",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b25b6b5f?w=150&h=150&fit=crop&crop=face",
-      status: "break",
-      todayHours: "6h 45m",
-      weekHours: "38h 30m",
-      currentTask: "Database Design",
-      startTime: "08:30 AM",
-      productivity: 92,
-      breaks: 2,
-      overtime: "0h 00m"
-    },
-    {
-      id: 3,
-      employee: "David Chen",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-      status: "offline",
-      todayHours: "8h 00m",
-      weekHours: "40h 00m",
-      currentTask: "Code Review",
-      startTime: "09:15 AM",
-      productivity: 78,
-      breaks: 4,
-      overtime: "0h 00m"
-    },
-    {
-      id: 4,
-      employee: "Sarah Johnson",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-      status: "active",
-      todayHours: "6h 12m",
-      weekHours: "35h 45m",
-      currentTask: "UI Testing",
-      startTime: "10:00 AM",
-      productivity: 95,
-      breaks: 1,
-      overtime: "0h 00m"
-    }
-  ];
+  // Get real time tracking data from API
+  const { data: timeTracking } = useQuery({
+    queryKey: ["/api/time-tracking"],
+  });
+
+  const timeTrackingData = timeTracking || [];
 
   const weeklyStats = {
-    totalHours: "156h 30m",
-    avgDaily: "7h 49m",
-    productivity: 88,
-    overtime: "12h 45m",
-    breaks: 45
+    totalHours: "0h 00m",
+    avgDaily: "0h 00m", 
+    productivity: 0,
+    overtime: "0h 00m",
+    breaks: 0
   };
 
   const getStatusColor = (status: string) => {
@@ -310,18 +261,25 @@ export default function TimeTracking() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {timeTrackingData.map((employee) => (
-                      <tr key={employee.id} className="hover:bg-gray-50">
-                        <td className="px-4 py-3 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <img 
-                              className="h-8 w-8 rounded-full" 
-                              src={employee.avatar} 
-                              alt={employee.employee}
-                            />
-                            <div className="ml-3">
-                              <div className="text-xs font-medium text-gray-900">{employee.employee}</div>
-                              <div className="text-[10px] text-gray-500">Started: {employee.startTime}</div>
+                    {timeTrackingData.length === 0 ? (
+                      <tr>
+                        <td colSpan={9} className="px-4 py-8 text-center text-sm text-gray-500">
+                          No time tracking data available. Run the .NET agent on employee systems to start collecting data.
+                        </td>
+                      </tr>
+                    ) : (
+                      timeTrackingData.map((employee) => (
+                        <tr key={employee.id} className="hover:bg-gray-50">
+                          <td className="px-4 py-3 whitespace-nowrap">
+                            <div className="flex items-center">
+                              <img 
+                                className="h-8 w-8 rounded-full" 
+                                src={employee.avatar} 
+                                alt={employee.employee}
+                              />
+                              <div className="ml-3">
+                                <div className="text-xs font-medium text-gray-900">{employee.employee}</div>
+                                <div className="text-[10px] text-gray-500">Started: {employee.startTime}</div>
                             </div>
                           </div>
                         </td>
@@ -375,8 +333,9 @@ export default function TimeTracking() {
                             </button>
                           </div>
                         </td>
-                      </tr>
-                    ))}
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
