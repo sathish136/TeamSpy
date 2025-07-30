@@ -132,7 +132,7 @@ export class MemStorage implements IStorage {
     this.activities = new Map();
     this.timeTracking = new Map();
     this.alerts = new Map();
-    this.seedData();
+    // Ready for real data from .NET agent - no dummy data
   }
 
   private seedData() {
