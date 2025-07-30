@@ -74,10 +74,72 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Agent registration and heartbeat endpoint
+  app.post("/api/agent/register", async (req, res) => {
+    try {
+      const { employeeId, computerName, ipAddress, agentVersion, operatingSystem } = req.body;
+      
+      // Update or create employee with agent information
+      let employee = await storage.getEmployee(employeeId);
+      if (!employee) {
+        // Create new employee if not exists
+        const employeeData = insertEmployeeSchema.parse({
+          id: employeeId,
+          name: `Employee ${employeeId}`,
+          computer: computerName,
+          computerName,
+          ipAddress,
+          agentVersion,
+          operatingSystem,
+          status: "online",
+          isOnline: true
+        });
+        employee = await storage.createEmployee(employeeData);
+      } else {
+        // Update existing employee with agent info
+        employee = await storage.updateEmployee(employeeId, {
+          computerName,
+          ipAddress,
+          agentVersion,
+          operatingSystem,
+          status: "online",
+          isOnline: true,
+          lastActive: new Date()
+        });
+      }
+      
+      res.json({ message: "Agent registered successfully", employee });
+    } catch (error) {
+      console.error("Agent registration error:", error);
+      res.status(400).json({ message: "Agent registration failed" });
+    }
+  });
+
+  app.post("/api/agent/heartbeat", async (req, res) => {
+    try {
+      const { employeeId } = req.body;
+      
+      // Update employee last active time
+      const employee = await storage.updateEmployee(employeeId, {
+        lastActive: new Date(),
+        isOnline: true,
+        status: "online"
+      });
+      
+      if (!employee) {
+        return res.status(404).json({ message: "Employee not found" });
+      }
+      
+      res.json({ message: "Heartbeat received", status: "online" });
+    } catch (error) {
+      res.status(400).json({ message: "Heartbeat failed" });
+    }
+  });
+
   app.post("/api/agent/data", async (req, res) => {
     try {
       // For now, just log the data. We can add schema validation later.
-      console.log("Received data from .NET agent:", req.body);
+      console.log("Received data from agent:", req.body);
       res.status(200).json({ message: "Data received" });
     } catch (error) {
       res.status(400).json({ message: "Invalid data" });

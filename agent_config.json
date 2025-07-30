@@ -1,0 +1,28 @@
+{
+  "server_url": "http://localhost:5000",
+  "api_endpoints": {
+    "register": "/api/agent/register",
+    "heartbeat": "/api/agent/heartbeat",
+    "sessions": "/api/sessions",
+    "applications": "/api/applications",
+    "websites": "/api/websites",
+    "keystrokes": "/api/keystrokes",
+    "screenshots": "/api/screenshots",
+    "clipboard_events": "/api/clipboard-events",
+    "file_activities": "/api/file-activities",
+    "print_jobs": "/api/print-jobs",
+    "communications": "/api/communications",
+    "network_activity": "/api/network-activity"
+  },
+  "settings": {
+    "heartbeat_interval": 30,
+    "screenshot_interval": 300,
+    "app_check_interval": 10,
+    "keystroke_logging_enabled": false,
+    "screenshot_enabled": true,
+    "file_monitoring_enabled": true,
+    "network_monitoring_enabled": true
+  },
+  "employee_id": "emp_001",
+  "api_key": null
+}
