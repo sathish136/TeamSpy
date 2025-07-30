@@ -4,12 +4,12 @@ import { MoreHorizontal } from "lucide-react";
 
 export default function ActivityChart() {
   const activityData = [
-    { label: "Productive", percentage: 78, color: "bg-green-400" },
-    { label: "Neutral", percentage: 15, color: "bg-yellow-400" },
-    { label: "Unproductive", percentage: 7, color: "bg-red-400" },
+    { label: "Productive", percentage: 0, color: "bg-green-400" },
+    { label: "Neutral", percentage: 0, color: "bg-yellow-400" },
+    { label: "Unproductive", percentage: 0, color: "bg-red-400" },
   ];
 
-  const chartBars = [60, 80, 40, 90, 70, 30, 85, 95, 45, 75];
+  const chartBars = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
   return (
     <Card>

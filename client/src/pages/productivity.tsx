@@ -71,7 +71,7 @@ export default function Productivity() {
                   <TrendingUp className="h-8 w-8 text-green-600" />
                   <div className="ml-4">
                     <h3 className="text-sm font-medium text-gray-900">Overall Score</h3>
-                    <p className="text-2xl font-bold text-green-600">87%</p>
+                    <p className="text-2xl font-bold text-green-600">0%</p>
                   </div>
                 </div>
               </CardContent>
@@ -83,7 +83,7 @@ export default function Productivity() {
                   <Target className="h-8 w-8 text-blue-600" />
                   <div className="ml-4">
                     <h3 className="text-sm font-medium text-gray-900">Goals Met</h3>
-                    <p className="text-2xl font-bold text-blue-600">23/28</p>
+                    <p className="text-2xl font-bold text-blue-600">0/0</p>
                   </div>
                 </div>
               </CardContent>
@@ -95,7 +95,7 @@ export default function Productivity() {
                   <Award className="h-8 w-8 text-purple-600" />
                   <div className="ml-4">
                     <h3 className="text-sm font-medium text-gray-900">Top Performers</h3>
-                    <p className="text-2xl font-bold text-purple-600">8</p>
+                    <p className="text-2xl font-bold text-purple-600">0</p>
                   </div>
                 </div>
               </CardContent>
@@ -107,7 +107,7 @@ export default function Productivity() {
                   <BarChart className="h-8 w-8 text-orange-600" />
                   <div className="ml-4">
                     <h3 className="text-sm font-medium text-gray-900">Improvement</h3>
-                    <p className="text-2xl font-bold text-orange-600">+5.2%</p>
+                    <p className="text-2xl font-bold text-orange-600">0%</p>
                   </div>
                 </div>
               </CardContent>
@@ -122,14 +122,10 @@ export default function Productivity() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {[
-                    { name: "Sarah Johnson", score: 95, change: "+3%", rank: 1 },
-                    { name: "David Chen", score: 92, change: "+1%", rank: 2 },
-                    { name: "Anna Martinez", score: 89, change: "-2%", rank: 3 },
-                    { name: "Seth McGregor", score: 87, change: "+5%", rank: 4 },
-                    { name: "Mike Wilson", score: 84, change: "+2%", rank: 5 },
-                    { name: "Lisa Brown", score: 81, change: "-1%", rank: 6 },
-                  ].map((employee, index) => (
+                  <div className="text-center text-gray-500 py-8">
+                    No productivity data available. Run the .NET agent on employee systems to start collecting data.
+                  </div>
+                  {[].map((employee, index) => (
                     <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                       <div className="flex items-center space-x-3">
                         <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm ${
@@ -169,36 +165,36 @@ export default function Productivity() {
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">Focus Time</span>
-                      <span className="text-sm text-gray-600">6.2h avg/day</span>
+                      <span className="text-sm text-gray-600">0h avg/day</span>
                     </div>
-                    <Progress value={78} className="h-2" />
+                    <Progress value={0} className="h-2" />
                     <p className="text-xs text-gray-500 mt-1">Target: 8h/day</p>
                   </div>
                   
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">Task Completion</span>
-                      <span className="text-sm text-gray-600">82%</span>
+                      <span className="text-sm text-gray-600">0%</span>
                     </div>
-                    <Progress value={82} className="h-2" />
+                    <Progress value={0} className="h-2" />
                     <p className="text-xs text-gray-500 mt-1">Target: 85%</p>
                   </div>
                   
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">Meeting Efficiency</span>
-                      <span className="text-sm text-gray-600">67%</span>
+                      <span className="text-sm text-gray-600">0%</span>
                     </div>
-                    <Progress value={67} className="h-2" />
+                    <Progress value={0} className="h-2" />
                     <p className="text-xs text-gray-500 mt-1">Target: 75%</p>
                   </div>
                   
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">Response Time</span>
-                      <span className="text-sm text-gray-600">94%</span>
+                      <span className="text-sm text-gray-600">0%</span>
                     </div>
-                    <Progress value={94} className="h-2" />
+                    <Progress value={0} className="h-2" />
                     <p className="text-xs text-gray-500 mt-1">Target: 90%</p>
                   </div>
                   

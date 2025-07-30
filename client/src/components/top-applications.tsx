@@ -3,52 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
 export default function TopApplications() {
-  const applications = [
-    {
-      name: "Microsoft Teams",
-      category: "Communication",
-      time: "3.2h",
-      icon: "fab fa-microsoft",
-      iconColor: "text-blue-600",
-      bgColor: "bg-blue-100"
-    },
-    {
-      name: "Slack",
-      category: "Communication", 
-      time: "2.8h",
-      icon: "fab fa-slack",
-      iconColor: "text-green-600",
-      bgColor: "bg-green-100"
-    },
-    {
-      name: "Google Drive",
-      category: "Productivity",
-      time: "2.1h", 
-      icon: "fab fa-google",
-      iconColor: "text-blue-600",
-      bgColor: "bg-blue-100"
-    },
-    {
-      name: "Email Client",
-      category: "Communication",
-      time: "1.9h",
-      icon: "fas fa-envelope", 
-      iconColor: "text-gray-600",
-      bgColor: "bg-gray-100"
-    },
-    {
-      name: "YouTube",
-      category: "Entertainment",
-      time: "0.7h",
-      icon: "fab fa-youtube",
-      iconColor: "text-red-600", 
-      bgColor: "bg-red-100"
-    }
-  ];
+  const applications = [];
 
   const usageCategories = [
-    { label: "Productive", percentage: 82, color: "bg-green-400" },
-    { label: "Unproductive", percentage: 18, color: "bg-red-400" }
+    { label: "Productive", percentage: 0, color: "bg-green-400" },
+    { label: "Unproductive", percentage: 0, color: "bg-red-400" }
   ];
 
   return (
@@ -61,20 +20,26 @@ export default function TopApplications() {
       </CardHeader>
       
       <CardContent className="space-y-4">
-        {applications.map((app) => (
-          <div key={app.name} className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className={`w-6 h-6 ${app.bgColor} rounded flex items-center justify-center`}>
-                <i className={`${app.icon} ${app.iconColor} text-xs`} />
-              </div>
-              <div>
-                <div className="text-xs font-medium text-gray-900">{app.name}</div>
-                <div className="text-[10px] text-gray-500">{app.category}</div>
-              </div>
-            </div>
-            <div className="text-xs font-medium text-gray-900">{app.time}</div>
+        {applications.length === 0 ? (
+          <div className="text-center text-gray-500 py-4">
+            No application data available. Run the .NET agent to start collecting data.
           </div>
-        ))}
+        ) : (
+          applications.map((app) => (
+            <div key={app.name} className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className={`w-6 h-6 ${app.bgColor} rounded flex items-center justify-center`}>
+                  <i className={`${app.icon} ${app.iconColor} text-xs`} />
+                </div>
+                <div>
+                  <div className="text-xs font-medium text-gray-900">{app.name}</div>
+                  <div className="text-[10px] text-gray-500">{app.category}</div>
+                </div>
+              </div>
+              <div className="text-xs font-medium text-gray-900">{app.time}</div>
+            </div>
+          ))
+        )}
         
         {/* Usage breakdown chart */}
         <div className="mt-6 p-4 bg-gray-50 rounded-lg">

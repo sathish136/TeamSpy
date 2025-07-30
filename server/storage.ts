@@ -82,21 +82,19 @@ export interface IStorage {
   // Alert rule methods
   getAlertRules(): Promise<AlertRule[]>;
   createAlertRule(rule: InsertAlertRule): Promise<AlertRule>;
-  updateAlertRule(id: string, rule: Partial<AlertRule>): Promise<AlertRule | undefined>;
-  deleteAlertRule(id: string): Promise<boolean>;
   
   // Activity methods
   getActivities(employeeId?: string): Promise<Activity[]>;
   createActivity(activity: InsertActivity): Promise<Activity>;
   
   // Time tracking methods
-  getTimeTracking(employeeId?: string, date?: string): Promise<TimeTracking[]>;
+  getTimeTracking(employeeId?: string): Promise<TimeTracking[]>;
   createTimeTracking(timeTracking: InsertTimeTracking): Promise<TimeTracking>;
   
   // Alert methods
-  getAlerts(limit?: number): Promise<Alert[]>;
+  getAlerts(employeeId?: string): Promise<Alert[]>;
   createAlert(alert: InsertAlert): Promise<Alert>;
-  markAlertAsRead(id: string): Promise<Alert | undefined>;
+  updateAlert(id: string, alert: Partial<Alert>): Promise<Alert | undefined>;
 }
 
 export class MemStorage implements IStorage {
@@ -133,182 +131,6 @@ export class MemStorage implements IStorage {
     this.timeTracking = new Map();
     this.alerts = new Map();
     // Ready for real data from .NET agent - no dummy data
-  }
-
-  private seedData() {
-    // Seed employees
-    const employeesData: InsertEmployee[] = [
-      {
-        name: "Seth McGregor",
-        email: null,
-        department: null,
-        position: null,
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        location: "Germany / Frankfurt",
-        computer: "win-nt35short864",
-        currentTask: "Project Tasks",
-        currentActivity: "www.slack.com",
-        timeWorked: "7:48",
-        status: "online",
-        isOnline: true,
-        computerName: null,
-        ipAddress: null,
-        agentVersion: null,
-        operatingSystem: null,
-        workingHours: { start: "09:00", end: "17:00" }
-      },
-      {
-        name: "Sarah Johnson",
-        email: null,
-        department: null,
-        position: null,
-        avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        location: "Germany / Frankfurt",
-        computer: "win-nt35short864",
-        currentTask: "Microsoft Teams",
-        currentActivity: "teams.microsoft.com",
-        timeWorked: "8:24",
-        status: "online",
-        isOnline: true,
-        computerName: null,
-        ipAddress: null,
-        agentVersion: null,
-        operatingSystem: null,
-        workingHours: { start: "09:00", end: "17:00" }
-      },
-      {
-        name: "Michael Chen",
-        email: null,
-        department: null,
-        position: null,
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        location: "Germany / Frankfurt",
-        computer: "win-nt35short864",
-        currentTask: "Project Tasks",
-        currentActivity: "www.youtube.com",
-        timeWorked: "7:45",
-        status: "online",
-        isOnline: true,
-        computerName: null,
-        ipAddress: null,
-        agentVersion: null,
-        operatingSystem: null,
-        workingHours: { start: "09:00", end: "17:00" }
-      },
-      {
-        name: "Emily Rodriguez",
-        email: null,
-        department: null,
-        position: null,
-        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        location: "Germany / Frankfurt",
-        computer: "win-nt35short864",
-        currentTask: "Project Tasks",
-        currentActivity: "mail.google.com",
-        timeWorked: "7:48",
-        status: "online",
-        isOnline: true,
-        computerName: null,
-        ipAddress: null,
-        agentVersion: null,
-        operatingSystem: null,
-        workingHours: { start: "09:00", end: "17:00" }
-      },
-      {
-        name: "David Thompson",
-        email: null,
-        department: null,
-        position: null,
-        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        location: "Germany / Frankfurt",
-        computer: "win-nt35short864",
-        currentTask: "Project Tasks",
-        currentActivity: "drive.google.com",
-        timeWorked: "7:48",
-        status: "online",
-        isOnline: true,
-        computerName: null,
-        ipAddress: null,
-        agentVersion: null,
-        operatingSystem: null,
-        workingHours: { start: "09:00", end: "17:00" }
-      },
-      {
-        name: "Jessica Wilson",
-        email: null,
-        department: null,
-        position: null,
-        avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-        location: "Germany / Frankfurt",
-        computer: "win-nt35short864",
-        currentTask: "Project Tasks",
-        currentActivity: "www.linkedin.com",
-        timeWorked: "7:52",
-        status: "online",
-        isOnline: true,
-        computerName: null,
-        ipAddress: null,
-        agentVersion: null,
-        operatingSystem: null,
-        workingHours: { start: "09:00", end: "17:00" }
-      }
-    ];
-
-    employeesData.forEach(emp => {
-      const id = randomUUID();
-      const employee: Employee = {
-        ...emp,
-        id,
-        lastActive: new Date(),
-        isOnline: emp.isOnline ?? false
-      };
-      this.employees.set(id, employee);
-    });
-
-    // Seed alerts
-    const alertsData: InsertAlert[] = [
-      {
-        employeeId: Array.from(this.employees.keys())[2], // Michael Chen
-        ruleId: null,
-        type: "violation",
-        title: "Policy Violation",
-        description: "Michael Chen accessed restricted website",
-        severity: "high",
-        isRead: false,
-        metadata: null
-      },
-      {
-        employeeId: Array.from(this.employees.keys())[1], // Sarah Johnson
-        ruleId: null,
-        type: "idle",
-        title: "Extended Idle Time",
-        description: "Sarah Johnson idle for 15+ minutes",
-        severity: "medium",
-        isRead: false,
-        metadata: null
-      },
-      {
-        employeeId: Array.from(this.employees.keys())[3], // Emily Rodriguez
-        ruleId: null,
-        type: "login",
-        title: "New Login",
-        description: "Emily Rodriguez logged in from new device",
-        severity: "low",
-        isRead: false,
-        metadata: null
-      }
-    ];
-
-    alertsData.forEach(alert => {
-      const id = randomUUID();
-      const alertRecord: Alert = {
-        ...alert,
-        id,
-        timestamp: new Date(),
-        isRead: alert.isRead ?? false
-      };
-      this.alerts.set(id, alertRecord);
-    });
   }
 
   // Employee methods
@@ -535,8 +357,7 @@ export class MemStorage implements IStorage {
     const newActivity: NetworkActivity = {
       ...activity,
       id,
-      startTime: new Date(),
-      endTime: null
+      timestamp: new Date()
     };
     this.networkActivity.set(id, newActivity);
     return newActivity;
@@ -552,23 +373,11 @@ export class MemStorage implements IStorage {
     const newRule: AlertRule = {
       ...rule,
       id,
-      createdAt: new Date()
+      createdAt: new Date(),
+      isActive: rule.isActive ?? true
     };
     this.alertRules.set(id, newRule);
     return newRule;
-  }
-
-  async updateAlertRule(id: string, rule: Partial<AlertRule>): Promise<AlertRule | undefined> {
-    const existing = this.alertRules.get(id);
-    if (!existing) return undefined;
-    
-    const updated = { ...existing, ...rule };
-    this.alertRules.set(id, updated);
-    return updated;
-  }
-
-  async deleteAlertRule(id: string): Promise<boolean> {
-    return this.alertRules.delete(id);
   }
 
   // Activity methods
@@ -592,41 +401,31 @@ export class MemStorage implements IStorage {
   }
 
   // Time tracking methods
-  async getTimeTracking(employeeId?: string, date?: string): Promise<TimeTracking[]> {
+  async getTimeTracking(employeeId?: string): Promise<TimeTracking[]> {
     const timeTracking = Array.from(this.timeTracking.values());
-    let filtered = timeTracking;
-    
     if (employeeId) {
-      filtered = filtered.filter(record => record.employeeId === employeeId);
+      return timeTracking.filter(tracking => tracking.employeeId === employeeId);
     }
-    
-    if (date) {
-      filtered = filtered.filter(record => record.date === date);
-    }
-    
-    return filtered;
+    return timeTracking;
   }
 
-  async createTimeTracking(timeTrackingData: InsertTimeTracking): Promise<TimeTracking> {
+  async createTimeTracking(timeTracking: InsertTimeTracking): Promise<TimeTracking> {
     const id = randomUUID();
     const newTimeTracking: TimeTracking = {
-      ...timeTrackingData,
-      id
+      ...timeTracking,
+      id,
+      date: new Date()
     };
     this.timeTracking.set(id, newTimeTracking);
     return newTimeTracking;
   }
 
   // Alert methods
-  async getAlerts(limit?: number): Promise<Alert[]> {
-    const alerts = Array.from(this.alerts.values()).sort((a, b) => 
-      b.timestamp.getTime() - a.timestamp.getTime()
-    );
-    
-    if (limit) {
-      return alerts.slice(0, limit);
+  async getAlerts(employeeId?: string): Promise<Alert[]> {
+    const alerts = Array.from(this.alerts.values());
+    if (employeeId) {
+      return alerts.filter(alert => alert.employeeId === employeeId);
     }
-    
     return alerts;
   }
 
@@ -642,15 +441,14 @@ export class MemStorage implements IStorage {
     return newAlert;
   }
 
-  async markAlertAsRead(id: string): Promise<Alert | undefined> {
-    const alert = this.alerts.get(id);
-    if (!alert) return undefined;
+  async updateAlert(id: string, alert: Partial<Alert>): Promise<Alert | undefined> {
+    const existing = this.alerts.get(id);
+    if (!existing) return undefined;
     
-    const updated = { ...alert, isRead: true };
+    const updated = { ...existing, ...alert };
     this.alerts.set(id, updated);
     return updated;
   }
 }
 
-// Choose storage implementation - always use MemStorage for development
 export const storage = new MemStorage();

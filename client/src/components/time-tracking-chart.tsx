@@ -3,19 +3,19 @@ import { Button } from "@/components/ui/button";
 
 export default function TimeTrackingChart() {
   const weekData = [
-    { day: "Mon", height: 65, isWeekend: false },
-    { day: "Tue", height: 80, isWeekend: false },
-    { day: "Wed", height: 75, isWeekend: false },
-    { day: "Thu", height: 90, isWeekend: false },
-    { day: "Fri", height: 85, isWeekend: false },
-    { day: "Sat", height: 30, isWeekend: true },
-    { day: "Sun", height: 25, isWeekend: true },
+    { day: "Mon", height: 0, isWeekend: false },
+    { day: "Tue", height: 0, isWeekend: false },
+    { day: "Wed", height: 0, isWeekend: false },
+    { day: "Thu", height: 0, isWeekend: false },
+    { day: "Fri", height: 0, isWeekend: false },
+    { day: "Sat", height: 0, isWeekend: true },
+    { day: "Sun", height: 0, isWeekend: true },
   ];
 
   const timeStats = [
-    { label: "Total Hours", value: "42.5h", color: "text-gray-900" },
-    { label: "Productive", value: "38.2h", color: "text-green-600" },
-    { label: "Idle Time", value: "4.3h", color: "text-yellow-600" },
+    { label: "Total Hours", value: "0h", color: "text-gray-900" },
+    { label: "Productive", value: "0h", color: "text-green-600" },
+    { label: "Idle Time", value: "0h", color: "text-yellow-600" },
   ];
 
   return (

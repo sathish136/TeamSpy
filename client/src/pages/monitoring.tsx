@@ -71,7 +71,7 @@ export default function Monitoring() {
                   <Monitor className="h-8 w-8 text-blue-600" />
                   <div className="ml-4">
                     <h3 className="text-sm font-medium text-gray-900">Active Screens</h3>
-                    <p className="text-2xl font-bold text-gray-900">24</p>
+                    <p className="text-2xl font-bold text-gray-900">0</p>
                   </div>
                 </div>
               </CardContent>
@@ -83,7 +83,7 @@ export default function Monitoring() {
                   <Activity className="h-8 w-8 text-green-600" />
                   <div className="ml-4">
                     <h3 className="text-sm font-medium text-gray-900">CPU Usage</h3>
-                    <p className="text-2xl font-bold text-gray-900">45%</p>
+                    <p className="text-2xl font-bold text-gray-900">0%</p>
                   </div>
                 </div>
               </CardContent>
@@ -95,7 +95,7 @@ export default function Monitoring() {
                   <Wifi className="h-8 w-8 text-purple-600" />
                   <div className="ml-4">
                     <h3 className="text-sm font-medium text-gray-900">Network Load</h3>
-                    <p className="text-2xl font-bold text-gray-900">76%</p>
+                    <p className="text-2xl font-bold text-gray-900">0%</p>
                   </div>
                 </div>
               </CardContent>
@@ -107,7 +107,7 @@ export default function Monitoring() {
                   <HardDrive className="h-8 w-8 text-orange-600" />
                   <div className="ml-4">
                     <h3 className="text-sm font-medium text-gray-900">Storage Used</h3>
-                    <p className="text-2xl font-bold text-gray-900">62%</p>
+                    <p className="text-2xl font-bold text-gray-900">0%</p>
                   </div>
                 </div>
               </CardContent>
@@ -122,13 +122,10 @@ export default function Monitoring() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {[
-                    { name: "Seth McGregor", status: "active", app: "Microsoft Word", cpu: 23 },
-                    { name: "Anna Martinez", status: "active", app: "Google Chrome", cpu: 45 },
-                    { name: "David Chen", status: "idle", app: "Slack", cpu: 5 },
-                    { name: "Sarah Johnson", status: "active", app: "Visual Studio Code", cpu: 67 },
-                    { name: "Mike Wilson", status: "away", app: "Outlook", cpu: 12 },
-                  ].map((employee, index) => (
+                  <div className="text-center text-gray-500 py-8">
+                    No live activity data available. Run the .NET agent on employee systems to start monitoring.
+                  </div>
+                  {[].map((employee, index) => (
                     <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                       <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
@@ -170,33 +167,33 @@ export default function Monitoring() {
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">CPU Usage</span>
-                      <span className="text-sm text-gray-600">45%</span>
+                      <span className="text-sm text-gray-600">0%</span>
                     </div>
-                    <Progress value={45} className="h-2" />
+                    <Progress value={0} className="h-2" />
                   </div>
                   
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">Memory Usage</span>
-                      <span className="text-sm text-gray-600">68%</span>
+                      <span className="text-sm text-gray-600">0%</span>
                     </div>
-                    <Progress value={68} className="h-2" />
+                    <Progress value={0} className="h-2" />
                   </div>
                   
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">Network Load</span>
-                      <span className="text-sm text-gray-600">76%</span>
+                      <span className="text-sm text-gray-600">0%</span>
                     </div>
-                    <Progress value={76} className="h-2" />
+                    <Progress value={0} className="h-2" />
                   </div>
                   
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">Disk Usage</span>
-                      <span className="text-sm text-gray-600">62%</span>
+                      <span className="text-sm text-gray-600">0%</span>
                     </div>
-                    <Progress value={62} className="h-2" />
+                    <Progress value={0} className="h-2" />
                   </div>
                   
                   <div>
