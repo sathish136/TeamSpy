@@ -2,28 +2,13 @@ import { Link, useLocation } from "wouter";
 import { 
   Shield, 
   BarChart3, 
-  Clock, 
-  Monitor, 
-  AlertTriangle, 
-  TrendingUp, 
-  Users, 
-  Laptop, 
-  Settings, 
-  Server 
+  Clock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const menuItems = [
   { icon: BarChart3, label: "Dashboard", path: "/" },
   { icon: Clock, label: "Time Tracking", path: "/time-tracking" },
-  { icon: BarChart3, label: "Reports", path: "/reports" },
-  { icon: Monitor, label: "Monitoring", path: "/monitoring" },
-  { icon: AlertTriangle, label: "Risk", path: "/risk" },
-  { icon: TrendingUp, label: "Productivity", path: "/productivity" },
-  { icon: Users, label: "Employees", path: "/employees" },
-  { icon: Laptop, label: "Computers", path: "/computers" },
-  { icon: Settings, label: "Configure", path: "/configure" },
-  { icon: Server, label: "System", path: "/system" },
 ];
 
 export default function Sidebar() {

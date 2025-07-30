@@ -7,6 +7,7 @@ This is a modern employee monitoring dashboard application built as a full-stack
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Navigation: Only Dashboard and Time Tracking pages should be accessible - all other routes show 404 error pages.
 
 ## System Architecture
 

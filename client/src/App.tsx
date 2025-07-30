@@ -13,6 +13,7 @@ function Router() {
       <Route path="/" component={Dashboard} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/time-tracking" component={TimeTracking} />
+      {/* All other routes show 404 */}
       <Route component={NotFound} />
     </Switch>
   );
