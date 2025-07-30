@@ -114,3 +114,41 @@ The application is designed to seamlessly transition from in-memory storage to P
 4. Storage interface allows hot-swapping implementations
 
 The architecture supports both development (memory) and production (database) modes without code changes to the business logic.
+
+## Desktop Agent System
+
+### Agent Development
+- **Python Agent**: Comprehensive monitoring agent with cross-platform support
+- **C# .NET Agent**: Windows-focused enterprise agent with advanced system integration
+- **API Communication**: RESTful endpoints for all monitoring data types
+
+### Monitoring Capabilities
+Both agents support comprehensive data collection:
+- Session monitoring (login/logout/lock/unlock)
+- Application tracking with productivity categorization
+- Website monitoring with domain analysis
+- Network activity monitoring with risk assessment
+- File system monitoring with USB detection
+- Screen capture (periodic screenshots)
+- Print job monitoring
+- Email/chat metadata collection
+- Keystroke logging (optional, requires consent)
+- Clipboard monitoring
+
+### Data Collection Architecture
+- **Database Integration**: PostgreSQL schema supports all monitoring data types
+- **API Endpoints**: Comprehensive REST API for agent data submission
+- **Real-time Processing**: Live data ingestion with automatic categorization
+- **Risk Assessment**: Built-in security analysis for files and network activity
+
+### Agent Deployment
+- **Python Agent**: Cross-platform with pip installation
+- **C# Agent**: Windows service with MSI installer
+- **Configuration**: JSON-based configuration with environment variable support
+- **Authentication**: Optional API key authentication for secure communication
+
+### Security & Compliance
+- **Privacy Controls**: Granular feature toggles with consent management
+- **Data Encryption**: HTTPS-only communication with credential protection
+- **Risk Scoring**: Automatic threat assessment for monitored activities
+- **Audit Trail**: Complete monitoring history for compliance reporting
