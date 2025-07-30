@@ -88,13 +88,15 @@ export interface IStorage {
   createActivity(activity: InsertActivity): Promise<Activity>;
   
   // Time tracking methods
-  getTimeTracking(employeeId?: string): Promise<TimeTracking[]>;
+  getTimeTracking(employeeId?: string, date?: string): Promise<TimeTracking[]>;
   createTimeTracking(timeTracking: InsertTimeTracking): Promise<TimeTracking>;
   
   // Alert methods
-  getAlerts(employeeId?: string): Promise<Alert[]>;
+  getAlerts(limit?: number): Promise<Alert[]>;
   createAlert(alert: InsertAlert): Promise<Alert>;
   updateAlert(id: string, alert: Partial<Alert>): Promise<Alert | undefined>;
+  updateAlertRule(id: string, rule: Partial<AlertRule>): Promise<AlertRule | undefined>;
+  deleteAlertRule(id: string): Promise<boolean>;
 }
 
 export class MemStorage implements IStorage {
@@ -449,6 +451,239 @@ export class MemStorage implements IStorage {
     this.alerts.set(id, updated);
     return updated;
   }
+
+  async updateAlertRule(id: string, rule: Partial<AlertRule>): Promise<AlertRule | undefined> {
+    const existing = this.alertRules.get(id);
+    if (!existing) return undefined;
+    
+    const updated = { ...existing, ...rule };
+    this.alertRules.set(id, updated);
+    return updated;
+  }
+
+  async deleteAlertRule(id: string): Promise<boolean> {
+    return this.alertRules.delete(id);
+  }
 }
 
-export const storage = new MemStorage();
+import { db } from "./db";
+import { eq, and } from "drizzle-orm";
+import * as schema from "@shared/schema";
+
+export class DatabaseStorage implements IStorage {
+  async getEmployees(): Promise<Employee[]> {
+    return await db.select().from(schema.employees);
+  }
+
+  async getEmployee(id: string): Promise<Employee | undefined> {
+    const [employee] = await db.select().from(schema.employees).where(eq(schema.employees.id, id));
+    return employee || undefined;
+  }
+
+  async createEmployee(employee: InsertEmployee): Promise<Employee> {
+    const [created] = await db.insert(schema.employees).values(employee).returning();
+    return created;
+  }
+
+  async updateEmployee(id: string, employee: Partial<Employee>): Promise<Employee | undefined> {
+    const [updated] = await db.update(schema.employees)
+      .set({ ...employee, lastActive: new Date() })
+      .where(eq(schema.employees.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async getSessions(employeeId?: string): Promise<Session[]> {
+    if (employeeId) {
+      return await db.select().from(schema.sessions).where(eq(schema.sessions.employeeId, employeeId));
+    }
+    return await db.select().from(schema.sessions);
+  }
+
+  async createSession(session: InsertSession): Promise<Session> {
+    const [created] = await db.insert(schema.sessions).values(session).returning();
+    return created;
+  }
+
+  async getApplications(employeeId?: string): Promise<Application[]> {
+    if (employeeId) {
+      return await db.select().from(schema.applications).where(eq(schema.applications.employeeId, employeeId));
+    }
+    return await db.select().from(schema.applications);
+  }
+
+  async createApplication(application: InsertApplication): Promise<Application> {
+    const [created] = await db.insert(schema.applications).values(application).returning();
+    return created;
+  }
+
+  async getWebsites(employeeId?: string): Promise<Website[]> {
+    if (employeeId) {
+      return await db.select().from(schema.websites).where(eq(schema.websites.employeeId, employeeId));
+    }
+    return await db.select().from(schema.websites);
+  }
+
+  async createWebsite(website: InsertWebsite): Promise<Website> {
+    const [created] = await db.insert(schema.websites).values(website).returning();
+    return created;
+  }
+
+  async getKeystrokes(employeeId?: string): Promise<Keystroke[]> {
+    if (employeeId) {
+      return await db.select().from(schema.keystrokes).where(eq(schema.keystrokes.employeeId, employeeId));
+    }
+    return await db.select().from(schema.keystrokes);
+  }
+
+  async createKeystroke(keystroke: InsertKeystroke): Promise<Keystroke> {
+    const [created] = await db.insert(schema.keystrokes).values(keystroke).returning();
+    return created;
+  }
+
+  async getScreenshots(employeeId?: string): Promise<Screenshot[]> {
+    if (employeeId) {
+      return await db.select().from(schema.screenshots).where(eq(schema.screenshots.employeeId, employeeId));
+    }
+    return await db.select().from(schema.screenshots);
+  }
+
+  async createScreenshot(screenshot: InsertScreenshot): Promise<Screenshot> {
+    const [created] = await db.insert(schema.screenshots).values(screenshot).returning();
+    return created;
+  }
+
+  async getClipboardEvents(employeeId?: string): Promise<ClipboardEvent[]> {
+    if (employeeId) {
+      return await db.select().from(schema.clipboardEvents).where(eq(schema.clipboardEvents.employeeId, employeeId));
+    }
+    return await db.select().from(schema.clipboardEvents);
+  }
+
+  async createClipboardEvent(event: InsertClipboardEvent): Promise<ClipboardEvent> {
+    const [created] = await db.insert(schema.clipboardEvents).values(event).returning();
+    return created;
+  }
+
+  async getFileActivities(employeeId?: string): Promise<FileActivity[]> {
+    if (employeeId) {
+      return await db.select().from(schema.fileActivities).where(eq(schema.fileActivities.employeeId, employeeId));
+    }
+    return await db.select().from(schema.fileActivities);
+  }
+
+  async createFileActivity(activity: InsertFileActivity): Promise<FileActivity> {
+    const [created] = await db.insert(schema.fileActivities).values(activity).returning();
+    return created;
+  }
+
+  async getPrintJobs(employeeId?: string): Promise<PrintJob[]> {
+    if (employeeId) {
+      return await db.select().from(schema.printJobs).where(eq(schema.printJobs.employeeId, employeeId));
+    }
+    return await db.select().from(schema.printJobs);
+  }
+
+  async createPrintJob(job: InsertPrintJob): Promise<PrintJob> {
+    const [created] = await db.insert(schema.printJobs).values(job).returning();
+    return created;
+  }
+
+  async getCommunications(employeeId?: string): Promise<Communication[]> {
+    if (employeeId) {
+      return await db.select().from(schema.communications).where(eq(schema.communications.employeeId, employeeId));
+    }
+    return await db.select().from(schema.communications);
+  }
+
+  async createCommunication(communication: InsertCommunication): Promise<Communication> {
+    const [created] = await db.insert(schema.communications).values(communication).returning();
+    return created;
+  }
+
+  async getNetworkActivity(employeeId?: string): Promise<NetworkActivity[]> {
+    if (employeeId) {
+      return await db.select().from(schema.networkActivity).where(eq(schema.networkActivity.employeeId, employeeId));
+    }
+    return await db.select().from(schema.networkActivity);
+  }
+
+  async createNetworkActivity(activity: InsertNetworkActivity): Promise<NetworkActivity> {
+    const [created] = await db.insert(schema.networkActivity).values(activity).returning();
+    return created;
+  }
+
+  async getAlertRules(): Promise<AlertRule[]> {
+    return await db.select().from(schema.alertRules);
+  }
+
+  async createAlertRule(rule: InsertAlertRule): Promise<AlertRule> {
+    const [created] = await db.insert(schema.alertRules).values(rule).returning();
+    return created;
+  }
+
+  async updateAlertRule(id: string, rule: Partial<AlertRule>): Promise<AlertRule | undefined> {
+    const [updated] = await db.update(schema.alertRules)
+      .set(rule)
+      .where(eq(schema.alertRules.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async deleteAlertRule(id: string): Promise<boolean> {
+    const result = await db.delete(schema.alertRules).where(eq(schema.alertRules.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  async getActivities(employeeId?: string): Promise<Activity[]> {
+    if (employeeId) {
+      return await db.select().from(schema.activities).where(eq(schema.activities.employeeId, employeeId));
+    }
+    return await db.select().from(schema.activities);
+  }
+
+  async createActivity(activity: InsertActivity): Promise<Activity> {
+    const [created] = await db.insert(schema.activities).values(activity).returning();
+    return created;
+  }
+
+  async getTimeTracking(employeeId?: string, date?: string): Promise<TimeTracking[]> {
+    if (employeeId && date) {
+      return await db.select().from(schema.timeTracking).where(and(
+        eq(schema.timeTracking.employeeId, employeeId),
+        eq(schema.timeTracking.date, date)
+      ));
+    } else if (employeeId) {
+      return await db.select().from(schema.timeTracking).where(eq(schema.timeTracking.employeeId, employeeId));
+    }
+    
+    return await db.select().from(schema.timeTracking);
+  }
+
+  async createTimeTracking(timeTracking: InsertTimeTracking): Promise<TimeTracking> {
+    const [created] = await db.insert(schema.timeTracking).values(timeTracking).returning();
+    return created;
+  }
+
+  async getAlerts(limit?: number): Promise<Alert[]> {
+    if (limit) {
+      return await db.select().from(schema.alerts).orderBy(schema.alerts.timestamp).limit(limit);
+    }
+    return await db.select().from(schema.alerts).orderBy(schema.alerts.timestamp);
+  }
+
+  async createAlert(alert: InsertAlert): Promise<Alert> {
+    const [created] = await db.insert(schema.alerts).values(alert).returning();
+    return created;
+  }
+
+  async updateAlert(id: string, alert: Partial<Alert>): Promise<Alert | undefined> {
+    const [updated] = await db.update(schema.alerts)
+      .set(alert)
+      .where(eq(schema.alerts.id, id))
+      .returning();
+    return updated || undefined;
+  }
+}
+
+export const storage = new DatabaseStorage();
