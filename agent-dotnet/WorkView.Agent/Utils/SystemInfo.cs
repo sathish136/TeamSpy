@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
+using System.Net.NetworkInformation;
 
 namespace WorkView.Agent.Utils;
 
@@ -17,6 +18,39 @@ public class SystemInfo
         IpAddress = GetLocalIPAddress();
         AgentVersion = GetAgentVersion();
         OperatingSystem = GetOperatingSystemInfo();
+    }
+
+    public static string GetEmployeeId()
+    {
+        // Generate unique employee ID from computer name and MAC address
+        var computerName = Environment.MachineName;
+        var macAddress = GetMacAddress();
+        var hash = $"{computerName}-{macAddress}".GetHashCode();
+        return $"EMP-{Math.Abs(hash):X8}";
+    }
+
+    public static string GetMacAddress()
+    {
+        try
+        {
+            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet || 
+                    ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
+                {
+                    if (ni.OperationalStatus == OperationalStatus.Up)
+                    {
+                        return ni.GetPhysicalAddress().ToString();
+                    }
+                }
+            }
+        }
+        catch
+        {
+            // Fallback if network info is not available
+        }
+        
+        return "Unknown";
     }
 
     private string GetLocalIPAddress()

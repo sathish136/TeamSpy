@@ -8,6 +8,7 @@ This is a modern employee monitoring dashboard application built as a full-stack
 
 Preferred communication style: Simple, everyday language.
 Navigation: Only Dashboard and Time Tracking pages should be accessible - all other routes show 404 error pages.
+Deployment: Need simple .exe file that runs on 200 systems with zero configuration, automatically connects to server at 10.15.115.120:5000
 
 ## System Architecture
 

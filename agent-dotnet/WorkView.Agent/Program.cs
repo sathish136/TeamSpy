@@ -11,13 +11,25 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        // Parse command line arguments
-        var configuration = ParseArguments(args);
-        if (configuration == null)
+        // Auto-configure for simple deployment
+        var configuration = new MonitoringConfiguration
         {
-            ShowUsage();
-            return;
+            ServerUrl = "http://10.15.115.120:5000",
+            EmployeeId = SystemInfo.GetEmployeeId(), // Auto-generate from computer info
+            KeystrokeLoggingEnabled = false, // Disabled by default for privacy
+            ScreenshotEnabled = true,
+            FileMonitoringEnabled = true,
+            NetworkMonitoringEnabled = true
+        };
+
+        // Allow override from command line if provided
+        if (args.Length >= 2)
+        {
+            configuration.ServerUrl = args[0];
+            configuration.EmployeeId = args[1];
         }
+
+        configuration.SetDefaults();
 
         // Build configuration
         var config = new ConfigurationBuilder()
