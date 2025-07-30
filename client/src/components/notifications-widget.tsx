@@ -28,10 +28,10 @@ export default function NotificationsWidget({ alerts }: NotificationsWidgetProps
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-        <CardTitle className="text-lg font-semibold">Recent Alerts</CardTitle>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+        <CardTitle className="text-sm font-semibold">Recent Alerts</CardTitle>
         {alerts.length > 0 && (
-          <Badge variant="destructive" className="text-xs">
+          <Badge variant="destructive" className="text-[10px] px-1.5 py-0.5">
             {alerts.length}
           </Badge>
         )}
@@ -48,11 +48,11 @@ export default function NotificationsWidget({ alerts }: NotificationsWidgetProps
               key={alert.id}
               className={`flex items-start space-x-3 p-3 rounded-lg ${getSeverityColor(alert.severity)}`}
             >
-              <div className={`w-2 h-2 ${getSeverityDotColor(alert.severity)} rounded-full mt-2`} />
+              <div className={`w-1.5 h-1.5 ${getSeverityDotColor(alert.severity)} rounded-full mt-1.5`} />
               <div className="flex-1">
-                <div className="text-sm font-medium text-gray-900">{alert.title}</div>
-                <div className="text-xs text-gray-600">{alert.description}</div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-xs font-medium text-gray-900">{alert.title}</div>
+                <div className="text-[10px] text-gray-600">{alert.description}</div>
+                <div className="text-[10px] text-gray-500 mt-1">
                   {formatDistanceToNow(new Date(alert.timestamp), { addSuffix: true })}
                 </div>
               </div>
@@ -61,7 +61,7 @@ export default function NotificationsWidget({ alerts }: NotificationsWidgetProps
         )}
         
         {alerts.length > 0 && (
-          <button className="w-full mt-4 text-center text-sm workview-primary hover:workview-primary-dark font-medium">
+          <button className="w-full mt-4 text-center text-xs workview-primary hover:workview-primary-dark font-medium">
             View All Alerts
           </button>
         )}

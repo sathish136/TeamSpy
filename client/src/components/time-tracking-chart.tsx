@@ -20,12 +20,12 @@ export default function TimeTrackingChart() {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-6">
-        <CardTitle className="text-lg font-semibold">Time Tracking Overview</CardTitle>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <CardTitle className="text-sm font-semibold">Time Tracking Overview</CardTitle>
         <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm">Today</Button>
-          <Button size="sm" className="bg-workview-primary hover:bg-workview-primary-dark">Week</Button>
-          <Button variant="outline" size="sm">Month</Button>
+          <Button variant="outline" size="sm" className="text-[10px] px-2 py-1">Today</Button>
+          <Button size="sm" className="bg-workview-primary hover:bg-workview-primary-dark text-[10px] px-2 py-1">Week</Button>
+          <Button variant="outline" size="sm" className="text-[10px] px-2 py-1">Month</Button>
         </div>
       </CardHeader>
       
@@ -39,7 +39,7 @@ export default function TimeTrackingChart() {
                   className={`rounded-t ${data.isWeekend ? 'bg-gray-300' : 'bg-workview-primary'}`}
                   style={{ height: `${data.height}%` }}
                 />
-                <div className="text-xs text-center text-gray-500 mt-2">{data.day}</div>
+                <div className="text-[10px] text-center text-gray-500 mt-1">{data.day}</div>
               </div>
             ))}
           </div>
@@ -48,8 +48,8 @@ export default function TimeTrackingChart() {
         <div className="grid grid-cols-3 gap-4 mt-6">
           {timeStats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className={`text-2xl font-bold ${stat.color}`}>{stat.value}</div>
-              <div className="text-sm text-gray-500">{stat.label}</div>
+              <div className={`text-lg font-bold ${stat.color}`}>{stat.value}</div>
+              <div className="text-xs text-gray-500">{stat.label}</div>
             </div>
           ))}
         </div>

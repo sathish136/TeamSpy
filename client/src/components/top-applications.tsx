@@ -53,9 +53,9 @@ export default function TopApplications() {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-6">
-        <CardTitle className="text-lg font-semibold">Top Applications</CardTitle>
-        <Button variant="ghost" className="workview-primary hover:workview-primary-dark p-0">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <CardTitle className="text-sm font-semibold">Top Applications</CardTitle>
+        <Button variant="ghost" className="workview-primary hover:workview-primary-dark p-0 text-xs">
           View All
         </Button>
       </CardHeader>
@@ -64,27 +64,27 @@ export default function TopApplications() {
         {applications.map((app) => (
           <div key={app.name} className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className={`w-8 h-8 ${app.bgColor} rounded-lg flex items-center justify-center`}>
-                <i className={`${app.icon} ${app.iconColor}`} />
+              <div className={`w-6 h-6 ${app.bgColor} rounded flex items-center justify-center`}>
+                <i className={`${app.icon} ${app.iconColor} text-xs`} />
               </div>
               <div>
-                <div className="text-sm font-medium text-gray-900">{app.name}</div>
-                <div className="text-xs text-gray-500">{app.category}</div>
+                <div className="text-xs font-medium text-gray-900">{app.name}</div>
+                <div className="text-[10px] text-gray-500">{app.category}</div>
               </div>
             </div>
-            <div className="text-sm font-medium text-gray-900">{app.time}</div>
+            <div className="text-xs font-medium text-gray-900">{app.time}</div>
           </div>
         ))}
         
         {/* Usage breakdown chart */}
         <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <div className="text-sm font-medium text-gray-900 mb-3">Usage Categories</div>
+          <div className="text-xs font-medium text-gray-900 mb-2">Usage Categories</div>
           <div className="space-y-2">
             {usageCategories.map((category) => (
               <div key={category.label}>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs text-gray-600">{category.label}</span>
-                  <span className={`text-xs font-medium ${
+                  <span className="text-[10px] text-gray-600">{category.label}</span>
+                  <span className={`text-[10px] font-medium ${
                     category.label === "Productive" ? "text-green-600" : "text-red-600"
                   }`}>
                     {category.percentage}%

@@ -13,26 +13,26 @@ export default function ActivityChart() {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-        <CardTitle className="text-lg font-semibold">Activity Overview</CardTitle>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+        <CardTitle className="text-sm font-semibold">Activity Overview</CardTitle>
         <button className="text-gray-400 hover:text-gray-600">
-          <MoreHorizontal className="h-4 w-4" />
+          <MoreHorizontal className="h-3.5 w-3.5" />
         </button>
       </CardHeader>
       
       <CardContent className="space-y-4">
         {activityData.map((item) => (
-          <div key={item.label} className="space-y-2">
+          <div key={item.label} className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">{item.label}</span>
-              <span className={`text-sm font-medium ${
+              <span className="text-xs text-gray-600">{item.label}</span>
+              <span className={`text-xs font-medium ${
                 item.label === "Productive" ? "text-green-600" :
                 item.label === "Neutral" ? "text-yellow-600" : "text-red-600"
               }`}>
                 {item.percentage}%
               </span>
             </div>
-            <Progress value={item.percentage} className="h-2" />
+            <Progress value={item.percentage} className="h-1.5" />
           </div>
         ))}
         

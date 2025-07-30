@@ -32,7 +32,7 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <h1 className="text-xl font-semibold">Dashboard</h1>
+                <h1 className="text-sm font-medium">Dashboard</h1>
               </div>
             </div>
             
@@ -41,31 +41,32 @@ export default function Dashboard() {
                 <input 
                   type="search" 
                   placeholder="Search..." 
-                  className="bg-white bg-opacity-20 placeholder-blue-100 text-white rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-white"
+                  className="bg-white bg-opacity-20 placeholder-blue-100 text-white rounded-md px-2.5 py-1 w-48 text-xs focus:outline-none focus:ring-2 focus:ring-white"
                 />
-                <Search className="absolute right-3 top-3 h-4 w-4 text-blue-100" />
+                <Search className="absolute right-2 top-2 h-3 w-3 text-blue-100" />
               </div>
               
               <div className="flex items-center space-x-4">
                 <button className="relative">
-                  <Bell className="h-5 w-5" />
+                  <Bell className="h-4 w-4" />
                   {unreadAlerts.length > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-[10px] rounded-full w-4 h-4 flex items-center justify-center">
                       {unreadAlerts.length}
                     </span>
                   )}
                 </button>
                 
                 <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                    <User className="h-4 w-4" />
+                  <div className="w-7 h-7 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                    <User className="h-3.5 w-3.5" />
                   </div>
-                  <span className="text-sm font-medium">Main Admin</span>
+                  <span className="text-[10px] font-medium">Main Admin</span>
                 </div>
                 
                 <Button 
                   variant="ghost" 
-                  className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white border-white"
+                  size="sm"
+                  className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white border-white text-[10px] px-2 py-1"
                 >
                   EXPLAIN THIS PAGE
                 </Button>
@@ -75,31 +76,31 @@ export default function Dashboard() {
         </header>
 
         {/* Dashboard Content */}
-        <main className="p-6">
+        <main className="p-4">
           {/* Date Range and Actions */}
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center space-x-4">
-              <div className="bg-white rounded-lg px-4 py-2 shadow-sm border flex items-center space-x-2">
-                <Calendar className="h-4 w-4 text-gray-500" />
-                <span className="text-sm font-medium">Jan 15, 2025 - Jan 22, 2025</span>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center space-x-3">
+              <div className="bg-white rounded-md px-2.5 py-1.5 shadow-sm border flex items-center space-x-1.5">
+                <Calendar className="h-3 w-3 text-gray-500" />
+                <span className="text-[10px] font-medium">Jan 15, 2025 - Jan 22, 2025</span>
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
-              <Button variant="outline">EDIT</Button>
-              <Button className="bg-workview-primary hover:bg-workview-primary-dark">ADD WIDGETS</Button>
+            <div className="flex items-center space-x-2">
+              <Button variant="outline" size="sm" className="text-[10px] px-2 py-1">EDIT</Button>
+              <Button size="sm" className="bg-workview-primary hover:bg-workview-primary-dark text-[10px] px-2 py-1">ADD WIDGETS</Button>
             </div>
           </div>
 
           {/* Dashboard Grid */}
-          <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-4">
             {/* Employee Table */}
             <div className="xl:col-span-3">
               <EmployeeTable employees={employees as any} isLoading={employeesLoading} />
             </div>
 
             {/* Right Sidebar Widgets */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               <ActivityChart />
               <LiveStats />
               <NotificationsWidget alerts={unreadAlerts} />
@@ -107,7 +108,7 @@ export default function Dashboard() {
           </div>
 
           {/* Bottom Analytics Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
             <TimeTrackingChart />
             <TopApplications />
           </div>

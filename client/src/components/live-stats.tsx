@@ -15,25 +15,25 @@ export default function LiveStats() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-lg font-semibold">Live Statistics</CardTitle>
+      <CardHeader className="pb-3">
+        <CardTitle className="text-sm font-semibold">Live Statistics</CardTitle>
       </CardHeader>
       
       <CardContent className="space-y-4">
         {statsData.map((item) => (
           <div key={item.label} className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className={`w-3 h-3 ${item.color} rounded-full`} />
-              <span className="text-sm text-gray-600">{item.label}</span>
+            <div className="flex items-center space-x-2">
+              <div className={`w-2 h-2 ${item.color} rounded-full`} />
+              <span className="text-xs text-gray-600">{item.label}</span>
             </div>
-            <span className="text-lg font-bold text-gray-900">{item.value}</span>
+            <span className="text-sm font-bold text-gray-900">{item.value}</span>
           </div>
         ))}
         
         <div className="border-t pt-4 mt-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">Total Employees</span>
-            <span className="text-lg font-bold text-gray-900">{(stats as any)?.total || 0}</span>
+            <span className="text-xs text-gray-600">Total Employees</span>
+            <span className="text-sm font-bold text-gray-900">{(stats as any)?.total || 0}</span>
           </div>
         </div>
       </CardContent>

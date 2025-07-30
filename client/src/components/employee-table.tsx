@@ -52,19 +52,19 @@ export default function EmployeeTable({ employees, isLoading }: EmployeeTablePro
 
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="px-6 py-4 border-b bg-gray-50">
+      <CardHeader className="px-4 py-3 border-b bg-gray-50">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">Online Employees</h2>
-          <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-500">
+          <h2 className="text-xs font-semibold text-gray-900">Online Employees</h2>
+          <div className="flex items-center space-x-3">
+            <span className="text-[10px] text-gray-500">
               {employees?.filter(emp => emp.isOnline).length || 0} online, 0 idle
             </span>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1.5">
               <button className="p-1 hover:bg-gray-200 rounded">
-                <Filter className="h-4 w-4 text-gray-400" />
+                <Filter className="h-3 w-3 text-gray-400" />
               </button>
               <button className="p-1 hover:bg-gray-200 rounded">
-                <Download className="h-4 w-4 text-gray-400" />
+                <Download className="h-3 w-3 text-gray-400" />
               </button>
             </div>
           </div>
@@ -76,25 +76,25 @@ export default function EmployeeTable({ employees, isLoading }: EmployeeTablePro
           <table className="w-full">
             <thead className="bg-gray-50 border-b">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                   Employee
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                   Location
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                   Computer
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                   Current Task
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                   Current Activity
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                   Time Worked
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-2.5 text-left text-[10px] font-semibold text-gray-500 uppercase tracking-wider">
                   Activity
                 </th>
               </tr>
@@ -102,43 +102,43 @@ export default function EmployeeTable({ employees, isLoading }: EmployeeTablePro
             <tbody className="bg-white divide-y divide-gray-200">
               {employees?.map((employee) => (
                 <tr key={employee.id} className="hover:bg-gray-50 cursor-pointer">
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-4 py-3 whitespace-nowrap">
                     <div className="flex items-center">
-                      <Avatar className="h-10 w-10">
+                      <Avatar className="h-8 w-8">
                         <AvatarImage src={employee.avatar} alt={employee.name} />
-                        <AvatarFallback>
+                        <AvatarFallback className="text-xs">
                           {employee.name.split(' ').map(n => n[0]).join('')}
                         </AvatarFallback>
                       </Avatar>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{employee.name}</div>
+                      <div className="ml-3">
+                        <div className="text-xs font-medium text-gray-900">{employee.name}</div>
                         <div className="flex items-center">
-                          <div className={`w-2 h-2 rounded-full mr-2 ${
+                          <div className={`w-1.5 h-1.5 rounded-full mr-1.5 ${
                             employee.isOnline ? 'bg-green-400' : 'bg-gray-400'
                           }`} />
-                          <Badge variant={employee.isOnline ? "default" : "secondary"} className="text-xs">
+                          <Badge variant={employee.isOnline ? "default" : "secondary"} className="text-[10px] px-1.5 py-0.5">
                             {employee.status}
                           </Badge>
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-4 py-3 whitespace-nowrap text-xs text-gray-900">
                     {employee.location}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-4 py-3 whitespace-nowrap text-xs text-gray-500">
                     {employee.computer}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-4 py-3 whitespace-nowrap text-xs text-gray-900">
                     {employee.currentTask}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-600">
+                  <td className="px-4 py-3 whitespace-nowrap text-xs text-blue-600">
                     {employee.currentActivity}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-4 py-3 whitespace-nowrap text-xs text-gray-900">
                     {employee.timeWorked}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-4 py-3 whitespace-nowrap">
                     <ActivityIndicator activity={employee.currentActivity} />
                   </td>
                 </tr>
@@ -147,16 +147,16 @@ export default function EmployeeTable({ employees, isLoading }: EmployeeTablePro
           </table>
         </div>
         
-        <div className="px-6 py-4 border-t bg-gray-50">
+        <div className="px-4 py-3 border-t bg-gray-50">
           <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-500">
+            <div className="text-xs text-gray-500">
               Showing 1 to {employees?.length || 0} of {employees?.length || 0} employees
             </div>
             <div className="flex items-center space-x-2">
-              <button className="px-3 py-1 text-sm border rounded-md hover:bg-gray-100 disabled:opacity-50" disabled>
+              <button className="px-2 py-1 text-xs border rounded hover:bg-gray-100 disabled:opacity-50" disabled>
                 Previous
               </button>
-              <button className="px-3 py-1 text-sm border rounded-md hover:bg-gray-100" disabled>
+              <button className="px-2 py-1 text-xs border rounded hover:bg-gray-100" disabled>
                 Next
               </button>
             </div>
