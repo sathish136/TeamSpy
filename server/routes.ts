@@ -1,7 +1,22 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertEmployeeSchema, insertActivitySchema, insertAlertSchema } from "@shared/schema";
+import { 
+  insertEmployeeSchema, 
+  insertActivitySchema, 
+  insertAlertSchema,
+  insertSessionSchema,
+  insertApplicationSchema,
+  insertWebsiteSchema,
+  insertKeystrokeSchema,
+  insertScreenshotSchema,
+  insertClipboardEventSchema,
+  insertFileActivitySchema,
+  insertPrintJobSchema,
+  insertCommunicationSchema,
+  insertNetworkActivitySchema,
+  insertAlertRuleSchema
+} from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Employee routes
@@ -66,6 +81,262 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(activity);
     } catch (error) {
       res.status(400).json({ message: "Invalid activity data" });
+    }
+  });
+
+  // Agent Data Collection API Routes
+  
+  // Session monitoring routes
+  app.get("/api/sessions", async (req, res) => {
+    try {
+      const employeeId = req.query.employeeId as string | undefined;
+      const sessions = await storage.getSessions(employeeId);
+      res.json(sessions);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch sessions" });
+    }
+  });
+
+  app.post("/api/sessions", async (req, res) => {
+    try {
+      const sessionData = insertSessionSchema.parse(req.body);
+      const session = await storage.createSession(sessionData);
+      res.status(201).json(session);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid session data" });
+    }
+  });
+
+  // Application tracking routes
+  app.get("/api/applications", async (req, res) => {
+    try {
+      const employeeId = req.query.employeeId as string | undefined;
+      const applications = await storage.getApplications(employeeId);
+      res.json(applications);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch applications" });
+    }
+  });
+
+  app.post("/api/applications", async (req, res) => {
+    try {
+      const applicationData = insertApplicationSchema.parse(req.body);
+      const application = await storage.createApplication(applicationData);
+      res.status(201).json(application);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid application data" });
+    }
+  });
+
+  // Website monitoring routes
+  app.get("/api/websites", async (req, res) => {
+    try {
+      const employeeId = req.query.employeeId as string | undefined;
+      const websites = await storage.getWebsites(employeeId);
+      res.json(websites);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch websites" });
+    }
+  });
+
+  app.post("/api/websites", async (req, res) => {
+    try {
+      const websiteData = insertWebsiteSchema.parse(req.body);
+      const website = await storage.createWebsite(websiteData);
+      res.status(201).json(website);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid website data" });
+    }
+  });
+
+  // Keystroke logging routes
+  app.get("/api/keystrokes", async (req, res) => {
+    try {
+      const employeeId = req.query.employeeId as string | undefined;
+      const keystrokes = await storage.getKeystrokes(employeeId);
+      res.json(keystrokes);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch keystrokes" });
+    }
+  });
+
+  app.post("/api/keystrokes", async (req, res) => {
+    try {
+      const keystrokeData = insertKeystrokeSchema.parse(req.body);
+      const keystroke = await storage.createKeystroke(keystrokeData);
+      res.status(201).json(keystroke);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid keystroke data" });
+    }
+  });
+
+  // Screenshot routes
+  app.get("/api/screenshots", async (req, res) => {
+    try {
+      const employeeId = req.query.employeeId as string | undefined;
+      const screenshots = await storage.getScreenshots(employeeId);
+      res.json(screenshots);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch screenshots" });
+    }
+  });
+
+  app.post("/api/screenshots", async (req, res) => {
+    try {
+      const screenshotData = insertScreenshotSchema.parse(req.body);
+      const screenshot = await storage.createScreenshot(screenshotData);
+      res.status(201).json(screenshot);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid screenshot data" });
+    }
+  });
+
+  // Clipboard monitoring routes
+  app.get("/api/clipboard-events", async (req, res) => {
+    try {
+      const employeeId = req.query.employeeId as string | undefined;
+      const events = await storage.getClipboardEvents(employeeId);
+      res.json(events);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch clipboard events" });
+    }
+  });
+
+  app.post("/api/clipboard-events", async (req, res) => {
+    try {
+      const eventData = insertClipboardEventSchema.parse(req.body);
+      const event = await storage.createClipboardEvent(eventData);
+      res.status(201).json(event);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid clipboard event data" });
+    }
+  });
+
+  // File activity routes
+  app.get("/api/file-activities", async (req, res) => {
+    try {
+      const employeeId = req.query.employeeId as string | undefined;
+      const activities = await storage.getFileActivities(employeeId);
+      res.json(activities);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch file activities" });
+    }
+  });
+
+  app.post("/api/file-activities", async (req, res) => {
+    try {
+      const activityData = insertFileActivitySchema.parse(req.body);
+      const activity = await storage.createFileActivity(activityData);
+      res.status(201).json(activity);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid file activity data" });
+    }
+  });
+
+  // Print job routes
+  app.get("/api/print-jobs", async (req, res) => {
+    try {
+      const employeeId = req.query.employeeId as string | undefined;
+      const jobs = await storage.getPrintJobs(employeeId);
+      res.json(jobs);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch print jobs" });
+    }
+  });
+
+  app.post("/api/print-jobs", async (req, res) => {
+    try {
+      const jobData = insertPrintJobSchema.parse(req.body);
+      const job = await storage.createPrintJob(jobData);
+      res.status(201).json(job);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid print job data" });
+    }
+  });
+
+  // Communication monitoring routes
+  app.get("/api/communications", async (req, res) => {
+    try {
+      const employeeId = req.query.employeeId as string | undefined;
+      const communications = await storage.getCommunications(employeeId);
+      res.json(communications);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch communications" });
+    }
+  });
+
+  app.post("/api/communications", async (req, res) => {
+    try {
+      const communicationData = insertCommunicationSchema.parse(req.body);
+      const communication = await storage.createCommunication(communicationData);
+      res.status(201).json(communication);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid communication data" });
+    }
+  });
+
+  // Network activity routes
+  app.get("/api/network-activity", async (req, res) => {
+    try {
+      const employeeId = req.query.employeeId as string | undefined;
+      const activities = await storage.getNetworkActivity(employeeId);
+      res.json(activities);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch network activities" });
+    }
+  });
+
+  app.post("/api/network-activity", async (req, res) => {
+    try {
+      const activityData = insertNetworkActivitySchema.parse(req.body);
+      const activity = await storage.createNetworkActivity(activityData);
+      res.status(201).json(activity);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid network activity data" });
+    }
+  });
+
+  // Alert rules routes
+  app.get("/api/alert-rules", async (req, res) => {
+    try {
+      const rules = await storage.getAlertRules();
+      res.json(rules);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch alert rules" });
+    }
+  });
+
+  app.post("/api/alert-rules", async (req, res) => {
+    try {
+      const ruleData = insertAlertRuleSchema.parse(req.body);
+      const rule = await storage.createAlertRule(ruleData);
+      res.status(201).json(rule);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid alert rule data" });
+    }
+  });
+
+  app.patch("/api/alert-rules/:id", async (req, res) => {
+    try {
+      const rule = await storage.updateAlertRule(req.params.id, req.body);
+      if (!rule) {
+        return res.status(404).json({ message: "Alert rule not found" });
+      }
+      res.json(rule);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update alert rule" });
+    }
+  });
+
+  app.delete("/api/alert-rules/:id", async (req, res) => {
+    try {
+      const success = await storage.deleteAlertRule(req.params.id);
+      if (!success) {
+        return res.status(404).json({ message: "Alert rule not found" });
+      }
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ message: "Failed to delete alert rule" });
     }
   });
 
