@@ -8,9 +8,9 @@ export default function LiveStats() {
   });
 
   const statsData = [
-    { label: "Online", value: stats?.online || 0, color: "bg-green-400" },
-    { label: "Idle", value: stats?.idle || 0, color: "bg-yellow-400" },
-    { label: "Offline", value: stats?.offline || 0, color: "bg-gray-400" },
+    { label: "Online", value: (stats as any)?.online || 0, color: "bg-green-400" },
+    { label: "Idle", value: (stats as any)?.idle || 0, color: "bg-yellow-400" },
+    { label: "Offline", value: (stats as any)?.offline || 0, color: "bg-gray-400" },
   ];
 
   return (
@@ -33,7 +33,7 @@ export default function LiveStats() {
         <div className="border-t pt-4 mt-4">
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-600">Total Employees</span>
-            <span className="text-lg font-bold text-gray-900">{stats?.total || 0}</span>
+            <span className="text-lg font-bold text-gray-900">{(stats as any)?.total || 0}</span>
           </div>
         </div>
       </CardContent>

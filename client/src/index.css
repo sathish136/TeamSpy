@@ -24,10 +24,13 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* Teramind specific colors */
-  --teramind-orange: hsl(11, 100%, 60%);
-  --teramind-dark: hsl(0, 0%, 18%);
-  --teramind-light: hsl(210, 20%, 98%);
+  /* WorkView specific colors */
+  --workview-primary: hsl(220, 90%, 56%);
+  --workview-primary-dark: hsl(220, 90%, 46%);
+  --workview-accent: hsl(45, 100%, 60%);
+  --workview-dark: hsl(215, 28%, 17%);
+  --workview-light: hsl(220, 14%, 96%);
+  --workview-gray: hsl(215, 16%, 47%);
 }
 
 .dark {
@@ -65,27 +68,51 @@
 }
 
 @layer utilities {
-  .teramind-orange {
-    color: var(--teramind-orange);
+  .workview-primary {
+    color: var(--workview-primary);
   }
   
-  .bg-teramind-orange {
-    background-color: var(--teramind-orange);
+  .bg-workview-primary {
+    background-color: var(--workview-primary);
   }
   
-  .teramind-dark {
-    color: var(--teramind-dark);
+  .workview-primary-dark {
+    color: var(--workview-primary-dark);
   }
   
-  .bg-teramind-dark {
-    background-color: var(--teramind-dark);
+  .bg-workview-primary-dark {
+    background-color: var(--workview-primary-dark);
   }
   
-  .teramind-light {
-    color: var(--teramind-light);
+  .workview-accent {
+    color: var(--workview-accent);
   }
   
-  .bg-teramind-light {
-    background-color: var(--teramind-light);
+  .bg-workview-accent {
+    background-color: var(--workview-accent);
+  }
+  
+  .workview-dark {
+    color: var(--workview-dark);
+  }
+  
+  .bg-workview-dark {
+    background-color: var(--workview-dark);
+  }
+  
+  .workview-light {
+    color: var(--workview-light);
+  }
+  
+  .bg-workview-light {
+    background-color: var(--workview-light);
+  }
+  
+  .workview-gray {
+    color: var(--workview-gray);
+  }
+  
+  .bg-workview-gray {
+    background-color: var(--workview-gray);
   }
 }

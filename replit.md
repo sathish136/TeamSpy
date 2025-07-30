@@ -1,8 +1,8 @@
-# Employee Monitoring Dashboard
+# WorkView - Employee Monitoring Dashboard
 
 ## Overview
 
-This is a modern employee monitoring dashboard application built as a full-stack TypeScript project. The application provides real-time tracking of employee activities, time management, and productivity analytics similar to enterprise monitoring solutions like Teramind.
+This is a modern employee monitoring dashboard application built as a full-stack TypeScript project. The application provides real-time tracking of employee activities, time management, and productivity analytics similar to enterprise monitoring solutions like Teramind. The system has been rebranded as "WorkView" with an improved professional blue color scheme.
 
 ## User Preferences
 
@@ -26,7 +26,7 @@ Preferred communication style: Simple, everyday language.
 
 ### UI Component System
 - **Design System**: shadcn/ui components built on Radix UI primitives
-- **Theme**: Custom Teramind branding with orange (#FF6B35) accent colors
+- **Theme**: Custom WorkView branding with professional blue (HSL 220, 90%, 56%) primary colors
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
 - **Icons**: Lucide React icon library
 

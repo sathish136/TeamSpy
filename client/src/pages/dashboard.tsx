@@ -19,16 +19,16 @@ export default function Dashboard() {
     refetchInterval: 30000, // Refresh every 30 seconds
   });
 
-  const unreadAlerts = alerts?.filter((alert: any) => !alert.isRead) || [];
+  const unreadAlerts = (alerts as any[])?.filter((alert: any) => !alert.isRead) || [];
 
   return (
-    <div className="min-h-screen bg-teramind-light">
+    <div className="min-h-screen bg-workview-light">
       <Sidebar />
       
       {/* Main Content */}
       <div className="ml-64">
         {/* Top Header */}
-        <header className="bg-gradient-to-r from-[#FF6B35] to-orange-500 text-white px-6 py-4 shadow-lg">
+        <header className="bg-gradient-to-r from-workview-primary to-workview-primary-dark text-white px-6 py-4 shadow-lg">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
@@ -41,9 +41,9 @@ export default function Dashboard() {
                 <input 
                   type="search" 
                   placeholder="Search..." 
-                  className="bg-white bg-opacity-20 placeholder-orange-100 text-white rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-white"
+                  className="bg-white bg-opacity-20 placeholder-blue-100 text-white rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-white"
                 />
-                <Search className="absolute right-3 top-3 h-4 w-4 text-orange-100" />
+                <Search className="absolute right-3 top-3 h-4 w-4 text-blue-100" />
               </div>
               
               <div className="flex items-center space-x-4">
@@ -87,7 +87,7 @@ export default function Dashboard() {
             
             <div className="flex items-center space-x-4">
               <Button variant="outline">EDIT</Button>
-              <Button className="bg-[#FF6B35] hover:bg-orange-600">ADD WIDGETS</Button>
+              <Button className="bg-workview-primary hover:bg-workview-primary-dark">ADD WIDGETS</Button>
             </div>
           </div>
 
@@ -95,7 +95,7 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
             {/* Employee Table */}
             <div className="xl:col-span-3">
-              <EmployeeTable employees={employees} isLoading={employeesLoading} />
+              <EmployeeTable employees={employees as any} isLoading={employeesLoading} />
             </div>
 
             {/* Right Sidebar Widgets */}

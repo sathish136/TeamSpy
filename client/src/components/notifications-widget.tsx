@@ -61,7 +61,7 @@ export default function NotificationsWidget({ alerts }: NotificationsWidgetProps
         )}
         
         {alerts.length > 0 && (
-          <button className="w-full mt-4 text-center text-sm text-[#FF6B35] hover:text-orange-600 font-medium">
+          <button className="w-full mt-4 text-center text-sm workview-primary hover:workview-primary-dark font-medium">
             View All Alerts
           </button>
         )}

@@ -24,7 +24,7 @@ export default function TimeTrackingChart() {
         <CardTitle className="text-lg font-semibold">Time Tracking Overview</CardTitle>
         <div className="flex items-center space-x-2">
           <Button variant="outline" size="sm">Today</Button>
-          <Button size="sm" className="bg-[#FF6B35] hover:bg-orange-600">Week</Button>
+          <Button size="sm" className="bg-workview-primary hover:bg-workview-primary-dark">Week</Button>
           <Button variant="outline" size="sm">Month</Button>
         </div>
       </CardHeader>
@@ -36,7 +36,7 @@ export default function TimeTrackingChart() {
             {weekData.map((data) => (
               <div key={data.day} className="flex-1 flex flex-col justify-end">
                 <div
-                  className={`rounded-t ${data.isWeekend ? 'bg-gray-300' : 'bg-[#FF6B35]'}`}
+                  className={`rounded-t ${data.isWeekend ? 'bg-gray-300' : 'bg-workview-primary'}`}
                   style={{ height: `${data.height}%` }}
                 />
                 <div className="text-xs text-center text-gray-500 mt-2">{data.day}</div>

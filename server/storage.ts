@@ -121,7 +121,8 @@ export class MemStorage implements IStorage {
       const employee: Employee = {
         ...emp,
         id,
-        lastActive: new Date()
+        lastActive: new Date(),
+        isOnline: emp.isOnline ?? false
       };
       this.employees.set(id, employee);
     });
@@ -159,7 +160,8 @@ export class MemStorage implements IStorage {
       const alertRecord: Alert = {
         ...alert,
         id,
-        timestamp: new Date()
+        timestamp: new Date(),
+        isRead: alert.isRead ?? false
       };
       this.alerts.set(id, alertRecord);
     });
@@ -178,7 +180,8 @@ export class MemStorage implements IStorage {
     const newEmployee: Employee = {
       ...employee,
       id,
-      lastActive: new Date()
+      lastActive: new Date(),
+      isOnline: employee.isOnline ?? false
     };
     this.employees.set(id, newEmployee);
     return newEmployee;
@@ -206,7 +209,9 @@ export class MemStorage implements IStorage {
     const newActivity: Activity = {
       ...activity,
       id,
-      timestamp: new Date()
+      timestamp: new Date(),
+      application: activity.application ?? null,
+      website: activity.website ?? null
     };
     this.activities.set(id, newActivity);
     return newActivity;
@@ -253,7 +258,8 @@ export class MemStorage implements IStorage {
     const newAlert: Alert = {
       ...alert,
       id,
-      timestamp: new Date()
+      timestamp: new Date(),
+      isRead: alert.isRead ?? false
     };
     this.alerts.set(id, newAlert);
     return newAlert;

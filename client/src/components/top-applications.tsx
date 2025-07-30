@@ -55,7 +55,7 @@ export default function TopApplications() {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-6">
         <CardTitle className="text-lg font-semibold">Top Applications</CardTitle>
-        <Button variant="ghost" className="text-[#FF6B35] hover:text-orange-600 p-0">
+        <Button variant="ghost" className="workview-primary hover:workview-primary-dark p-0">
           View All
         </Button>
       </CardHeader>
