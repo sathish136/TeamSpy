@@ -1,0 +1,13 @@
+{
+  "ServerUrl": "http://localhost:5000",
+  "EmployeeId": "emp_001",
+  "Settings": {
+    "HeartbeatInterval": 30,
+    "EnableKeyLogging": false,
+    "EnableScreenshots": true,
+    "EnableFileMonitoring": true,
+    "EnableNetworkMonitoring": true,
+    "EnableApplicationTracking": true,
+    "EnableWebsiteMonitoring": true
+  }
+}

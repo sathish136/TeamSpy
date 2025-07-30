@@ -18,6 +18,9 @@ Agent Integration: Python and C# monitoring agents available for connecting desk
 - ✅ **2025-01-30**: Created agent configuration file (`agent_config.json`) for easy setup
 - ✅ **2025-01-30**: Verified API connectivity with test agent registration (200 response)
 - ✅ **2025-01-30**: All required packages installed and workflow running on port 5000
+- ✅ **2025-01-30**: Added .NET ApiClient class for desktop agent integration
+- ✅ **2025-01-30**: Updated Program.cs with automatic agent registration and heartbeat
+- ✅ **2025-01-30**: Created test connection utilities for both Python and C# agents
 
 ## System Architecture
 
