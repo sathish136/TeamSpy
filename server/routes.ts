@@ -74,6 +74,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.post("/api/agent/data", async (req, res) => {
+    try {
+      // For now, just log the data. We can add schema validation later.
+      console.log("Received data from .NET agent:", req.body);
+      res.status(200).json({ message: "Data received" });
+    } catch (error) {
+      res.status(400).json({ message: "Invalid data" });
+    }
+  });
+
   app.post("/api/activities", async (req, res) => {
     try {
       const activityData = insertActivitySchema.parse(req.body);

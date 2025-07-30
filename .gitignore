@@ -4,3 +4,14 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Environment variables
+
+
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+
+# Log files
+*.log
+report.txt
