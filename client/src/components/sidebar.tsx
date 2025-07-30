@@ -36,7 +36,7 @@ export default function Sidebar() {
           <div className="w-8 h-8 bg-workview-primary rounded flex items-center justify-center">
             <Shield className="h-4 w-4 text-white" />
           </div>
-          <span className="text-sm font-semibold">EMPLOYEE MONITOR PRO</span>
+          <span className="text-lg font-semibold">IT-HuB</span>
         </div>
       </div>
       
